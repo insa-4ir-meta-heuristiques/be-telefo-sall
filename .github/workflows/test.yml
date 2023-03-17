@@ -1,0 +1,25 @@
+on: [push]
+
+jobs:
+  build-and-run:
+    # only run this on the template repository
+    runs-on: ubuntu-20.04
+    steps:
+      - name: Checkout 🛎️
+        uses: actions/checkout@v2
+
+      - name: Install dependencies
+        run: sudo apt-get install -y maven
+
+      - name: Build  
+        run: mvn -B compile
+      
+      - name: Run unit tests
+        run: mvn -B test
+
+      - name: Assemble Fat Jar
+        run: mvn -B package assembly:single
+
+      - name: Run simple example
+        run: java -jar target/jobshop-1.0-SNAPSHOT-jar-with-dependencies.jar --solver basic --instance ft06
+
