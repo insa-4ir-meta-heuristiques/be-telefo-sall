@@ -93,6 +93,8 @@ public class Schedule extends Encoding {
         return max;
     }
 
+
+
     /** Returns true if the given sequence of task is a critical path of the schedule. */
     public boolean isCriticalPath(List<Task> path) {
         if(startTime(path.get(0)) != 0) {

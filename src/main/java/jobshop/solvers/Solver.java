@@ -23,6 +23,7 @@ public interface Solver {
             case "basic": return new BasicSolver();
             case "spt": return new GreedySolver(GreedySolver.Priority.SPT);
             // TODO: add new solvers
+            //case "dct": return new DescentSolver();
             default: throw new RuntimeException("Unknown solver: "+ name);
         }
     }
