@@ -35,7 +35,7 @@ public class DescentSolver implements Solver {
 
         do {
             Min=resourceOrder1.toSchedule().get().makespan();
-            System.out.println("makespan="+Min);
+            //System.out.println("makespan="+Min);
             List<ResourceOrder> candidates=neighborhood.generateNeighbors(resourceOrder1);
             int j=0;
             //recuperer la 1ere resource order valide parmi celles de resourceOrder1
@@ -46,7 +46,8 @@ public class DescentSolver implements Solver {
             //On selectionne le meilleur voisin: celui qui a le + petit makespan
             min = resMin.toSchedule().get().makespan();
             for (int i = j; i < candidates.size(); i++) {
-                if (candidates.get(i).toSchedule().get().isValid() && candidates.get(i).toSchedule().get().makespan() < min) {
+
+                if (!candidates.get(i).toSchedule().isEmpty() && candidates.get(i).toSchedule().get().isValid() && candidates.get(i).toSchedule().get().makespan() < min) {
                     resMin = candidates.get(i);
                     min = resMin.toSchedule().get().makespan();
                 }
