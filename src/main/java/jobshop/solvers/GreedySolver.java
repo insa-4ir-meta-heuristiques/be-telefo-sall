@@ -113,12 +113,12 @@ public class GreedySolver implements Solver {
             case EST_SPT:
 
                 while (Collections.min(task_done) != numMachine) { /*pour s'arreter quand toutes les taches sont effectuées*/
-                    System.out.println("best start time " + bestStartTimeJobs);
-                    System.out.println("task done " + task_done);
-                    System.out.println("machine date " + machinesDates);
+                    //System.out.println("best start time " + bestStartTimeJobs);
+                    //System.out.println("task done " + task_done);
+                    //System.out.println("machine date " + machinesDates);
                     int minStartTime = Collections.min(bestStartTimeJobs);
                     int index = bestStartTimeJobs.indexOf(minStartTime);/*le num du job qui a le min de best */
-                    System.out.println("index "+index);
+                    //System.out.println("index "+index);
                     List<Integer> indexes = new ArrayList<>();
                     for (int i = 0; i < bestStartTimeJobs.size(); i++) {
                         if (bestStartTimeJobs.get(i).equals(minStartTime)) {
@@ -127,7 +127,7 @@ public class GreedySolver implements Solver {
                     }
                     if (indexes.size() == 1) {
                         Task task_t = new Task(index, task_done.get(index));
-                        System.out.println("Tache choisie:"+task_t);
+                        //System.out.println("Tache choisie:"+task_t);
                         resourceOrder.addTaskToMachine(instance.machine(task_t), task_t);
                         task_done.set(index, task_done.get(index) + 1);
 
@@ -162,9 +162,9 @@ public class GreedySolver implements Solver {
                                 indexOfMinTime = elt;
                             }
                         }
-                        System.out.println("index of min time:" + indexOfMinTime);
+                        //System.out.println("index of min time:" + indexOfMinTime);
                         Task task_t = new Task(indexOfMinTime, task_done.get(indexOfMinTime));
-                        System.out.println("Tache choisie:"+task_t);
+                        //System.out.println("Tache choisie:"+task_t);
                         resourceOrder.addTaskToMachine(instance.machine(task_t), task_t);
                         task_done.set(indexOfMinTime, task_done.get(indexOfMinTime) + 1);
                         if(task_done.get(indexOfMinTime) == numMachine){
@@ -191,12 +191,12 @@ public class GreedySolver implements Solver {
             case EST_LRPT:
 
                 while (Collections.min(task_done) != numMachine) {
-                    System.out.println("best start time " + bestStartTimeJobs);
-                    System.out.println("task done " + task_done);
-                    System.out.println("machine date " + machinesDates);
+                    //System.out.println("best start time " + bestStartTimeJobs);
+                    //System.out.println("task done " + task_done);
+                    //System.out.println("machine date " + machinesDates);
                     int minStartTime = Collections.min(bestStartTimeJobs);
                     int index = bestStartTimeJobs.indexOf(minStartTime);
-                    System.out.println("index "+index);
+                    //System.out.println("index "+index);
                     List<Integer> indexes = new ArrayList<>();
                     for (int i = 0; i < bestStartTimeJobs.size(); i++) {
                         if (bestStartTimeJobs.get(i).equals(minStartTime)) {
@@ -205,7 +205,7 @@ public class GreedySolver implements Solver {
                     }
                     if (indexes.size() == 1) {
                         Task task_t = new Task(index, task_done.get(index));
-                        System.out.println("Tache choisie:"+task_t);
+                        //System.out.println("Tache choisie:"+task_t);
                         resourceOrder.addTaskToMachine(instance.machine(task_t), task_t);
                         task_done.set(index, task_done.get(index) + 1);
                         if(task_done.get(index) == numMachine){
@@ -241,9 +241,9 @@ public class GreedySolver implements Solver {
                                 indexOfMaxTime = elt;
                             }
                         }
-                        System.out.println("index of max time" + indexOfMaxTime);
+                        //System.out.println("index of max time" + indexOfMaxTime);
                         Task task_t = new Task(indexOfMaxTime, task_done.get(indexOfMaxTime));
-                        System.out.println("Tache choisie:"+task_t);
+                        //System.out.println("Tache choisie:"+task_t);
                         resourceOrder.addTaskToMachine(instance.machine(task_t), task_t);
                         task_done.set(indexOfMaxTime, task_done.get(indexOfMaxTime) + 1);
                         if(task_done.get(indexOfMaxTime) == numMachine){
@@ -272,12 +272,12 @@ public class GreedySolver implements Solver {
             case EST_LPT_RANDOM:
 
                 while (Collections.min(task_done) != numMachine) { /*pour s'arreter quand toutes les taches sont effectuées*/
-                    System.out.println("best start time " + bestStartTimeJobs);
-                    System.out.println("task done " + task_done);
-                    System.out.println("machine date " + machinesDates);
+                    //System.out.println("best start time " + bestStartTimeJobs);
+                    //System.out.println("task done " + task_done);
+                    //System.out.println("machine date " + machinesDates);
                     int minStartTime = Collections.min(bestStartTimeJobs);
                     int index = bestStartTimeJobs.indexOf(minStartTime);/*le num du job qui a le min de best */
-                    System.out.println("index "+index);
+                    //System.out.println("index "+index);
                     List<Integer> indexes = new ArrayList<>();
                     for (int i = 0; i < bestStartTimeJobs.size(); i++) {
                         if (bestStartTimeJobs.get(i).equals(minStartTime)) {
@@ -286,7 +286,7 @@ public class GreedySolver implements Solver {
                     }
                     if (indexes.size() == 1) {
                         Task task_t = new Task(index, task_done.get(index));
-                        System.out.println("Tache choisie:"+task_t);
+                        //System.out.println("Tache choisie:"+task_t);
                         resourceOrder.addTaskToMachine(instance.machine(task_t), task_t);
                         task_done.set(index, task_done.get(index) + 1);
 
@@ -328,9 +328,9 @@ public class GreedySolver implements Solver {
                             }
                             nbreChoixNonRandom++;
                         }
-                        System.out.println("index of min time:" + indexOfMinTime);
+                        //System.out.println("index of min time:" + indexOfMinTime);
                         Task task_t = new Task(indexOfMinTime, task_done.get(indexOfMinTime));
-                        System.out.println("Tache choisie:"+task_t);
+                        //System.out.println("Tache choisie:"+task_t);
                         resourceOrder.addTaskToMachine(instance.machine(task_t), task_t);
                         task_done.set(indexOfMinTime, task_done.get(indexOfMinTime) + 1);
                         if(task_done.get(indexOfMinTime) == numMachine){
@@ -356,12 +356,12 @@ public class GreedySolver implements Solver {
                 break;
             case EST_LRPT_RANDOM:
                 while (Collections.min(task_done) != numMachine) {
-                    System.out.println("best start time " + bestStartTimeJobs);
-                    System.out.println("task done " + task_done);
-                    System.out.println("machine date " + machinesDates);
+                    //System.out.println("best start time " + bestStartTimeJobs);
+                    //System.out.println("task done " + task_done);
+                    //System.out.println("machine date " + machinesDates);
                     int minStartTime = Collections.min(bestStartTimeJobs);
                     int index = bestStartTimeJobs.indexOf(minStartTime);
-                    System.out.println("index "+index);
+                    //System.out.println("index "+index);
                     List<Integer> indexes = new ArrayList<>();
                     for (int i = 0; i < bestStartTimeJobs.size(); i++) {
                         if (bestStartTimeJobs.get(i).equals(minStartTime)) {
@@ -370,7 +370,7 @@ public class GreedySolver implements Solver {
                     }
                     if (indexes.size() == 1) {
                         Task task_t = new Task(index, task_done.get(index));
-                        System.out.println("Tache choisie:"+task_t);
+                        //System.out.println("Tache choisie:"+task_t);
                         resourceOrder.addTaskToMachine(instance.machine(task_t), task_t);
                         task_done.set(index, task_done.get(index) + 1);
                         if(task_done.get(index) == numMachine){
@@ -414,9 +414,9 @@ public class GreedySolver implements Solver {
 
                         }
 
-                        System.out.println("index of max time" + indexOfMaxTime);
+                        //System.out.println("index of max time" + indexOfMaxTime);
                         Task task_t = new Task(indexOfMaxTime, task_done.get(indexOfMaxTime));
-                        System.out.println("Tache choisie:"+task_t);
+                        //System.out.println("Tache choisie:"+task_t);
                         resourceOrder.addTaskToMachine(instance.machine(task_t), task_t);
                         task_done.set(indexOfMaxTime, task_done.get(indexOfMaxTime) + 1);
                         if(task_done.get(indexOfMaxTime) == numMachine){
