@@ -81,6 +81,16 @@ public final class ResourceOrder extends Encoding {
         return tasksByMachine[machine][taskIndex];
     }
 
+    /**return the num of order of a task executed in a machine**/
+    public int getIndexOfTask(Task task){
+        int i=0;
+        int machine= instance.machine(task);
+        while (!getTaskOfMachine(machine,i).equals(task)){
+            i++;
+        }
+        return i;
+    }
+
     /** Exchange the order of two tasks that are scheduled on a given machine.
      *
      * @param machine Machine on which the two tasks appear (line on which to perform the exchange)
@@ -158,6 +168,8 @@ public final class ResourceOrder extends Encoding {
     protected Object clone() {
         return new ResourceOrder(this);
     }
+
+
 
     @Override
     public String toString()

@@ -1,6 +1,8 @@
 package jobshop.solvers.neighborhood;
 
+import jobshop.Instance;
 import jobshop.encodings.ResourceOrder;
+import jobshop.encodings.Task;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -41,6 +43,19 @@ public class Nowicki extends Neighborhood {
             this.machine = machine;
             this.firstTask = firstTask;
             this.lastTask = lastTask;
+        }
+        public String toString(){
+            return "("+this.machine+","+this.firstTask+","+this.lastTask+")";
+        }
+        public int compareTo(Block a){
+             int result = Integer.compare(this.machine,a.machine);
+             if(result == 0){
+                 result = Integer.compare(this.firstTask,a.firstTask);
+             }
+             if(result == 0){
+                 result = Integer.compare(this.lastTask,a.lastTask);
+             }
+             return result;
         }
     }
 
@@ -87,7 +102,9 @@ public class Nowicki extends Neighborhood {
          *  The original ResourceOrder MUST NOT be modified by this operation.
          */
         public ResourceOrder generateFrom(ResourceOrder original) {
-            throw new UnsupportedOperationException();
+            ResourceOrder newResource=original.copy();
+            newResource.swapTasks(machine,t1,t2);
+            return newResource;
         }
 
         @Override
@@ -126,12 +143,50 @@ public class Nowicki extends Neighborhood {
 
     /** Returns a list of all the blocks of the critical path. */
     List<Block> blocksOfCriticalPath(ResourceOrder order) {
-        throw new UnsupportedOperationException();
+        List<Integer> machineVisited=new ArrayList<>();
+        List<Task> path=order.toSchedule().get().criticalPath();
+        System.out.println("critical path:"+path);
+        List<Block> blocks=new ArrayList<>();
+        for(Task task:path){
+            int numMachine= order.instance.machine(task);
+            int indexOfTask= order.getIndexOfTask(task);
+            if (machineVisited.contains(numMachine)){
+                int index=machineVisited.indexOf(numMachine);
+                Block blockMachineVisited=blocks.get(index);
+                if(blockMachineVisited.firstTask>indexOfTask){
+                    Block newBlock=new Block(numMachine,indexOfTask,blockMachineVisited.lastTask);
+                    blocks.set(index,newBlock);
+                }
+                else if(blockMachineVisited.lastTask<indexOfTask){
+                    Block newBlock=new Block(numMachine,blockMachineVisited.firstTask,indexOfTask);
+                    blocks.set(index,newBlock);
+                }
+            }
+            else{
+                machineVisited.add(numMachine);
+                Block blockOfThisMachine=new Block(numMachine,indexOfTask,indexOfTask);
+                blocks.add(blockOfThisMachine);
+            }
+        }
+        return blocks;
+
+
     }
+
 
     /** For a given block, return the possible swaps for the Nowicki and Smutnicki neighborhood */
     List<Swap> neighbors(Block block) {
-        throw new UnsupportedOperationException();
+        int fistTask= block.firstTask;
+        int lastTask= block.lastTask;
+        List<Swap> swaps=new ArrayList<>();
+        if(lastTask-fistTask<=1){
+            swaps.add(new Swap(block.machine,fistTask,lastTask));
+        }
+        else{
+            swaps.add(new Swap(block.machine,fistTask,fistTask+1));
+            swaps.add(new Swap(block.machine,lastTask-1,lastTask));
+        }
+        return swaps;
     }
 
 }
